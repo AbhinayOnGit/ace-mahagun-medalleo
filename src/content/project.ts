@@ -360,3 +360,33 @@ export const faqs = [
 
 export const disclaimer =
   "ACE is the Development Manager responsible for overseeing the planning, coordination and execution of the project. All information, images, specifications, amenities and floor plans shown on this website are representational and illustrative, are based on the developer's published material, and do not constitute a legal offering. The project on completion may differ from the artistic impressions shown. Areas are as published by the developer and are subject to change; 1 sq m = 10.764 sq ft. Distances are approximate. The project land is allotted by the New Okhla Industrial Development Authority to Mahagun Infratech Private Limited at Plot No. GH-01/A (Alpha), Sector 107, Noida vide lease deed dated 08.10.2021. Project launch date: 23.11.2022. Building plan approved vide permit no. 2022/01/31/6228 dated 09.09.2022. Please verify all project details on the UP RERA website (www.up-rera.in/projects) before making any decision.";
+
+/**
+ * Official walkthrough film — the same YouTube video ACE embeds on
+ * acegroupindia.com/ace-mahagun-medalleo-walkthrough.php and acemedalleomahagun.com
+ * (checked 16 Nov 2026). VERIFIED as ACE's own embed; written permission to
+ * re-embed on this advertiser site is still PENDING.
+ */
+export const walkthrough = {
+  youtubeId: "6ATAQnA3edY",
+  title: "ACE Mahagun Medalleo — official walkthrough",
+  source: "https://acegroupindia.com/ace-mahagun-medalleo-walkthrough.php",
+  poster: "/images/amenities/towers-dusk.webp",
+  status: "VERIFIED" as Status,
+} as const;
+
+/**
+ * 360° photo tours (equirectangular, 2:1 JPG/WebP in /public/tours).
+ * EMPTY until real site / sample-flat 360° photos are supplied with permission.
+ * With no real tours, the 360° viewer is hidden in production and shows a
+ * labelled test pattern on previews only.
+ */
+export type Tour360 = { id: string; title: string; src: string; note?: string };
+export const tours360: Tour360[] = [];
+
+export const tour360TestPattern: Tour360 = {
+  id: "test-pattern",
+  title: "Test pattern",
+  src: "/tours/test-pattern.webp",
+  note: "Preview only — not a project photo. Replace with real 360° captures.",
+};

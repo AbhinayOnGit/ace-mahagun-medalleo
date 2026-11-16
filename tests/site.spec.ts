@@ -124,6 +124,25 @@ test("EMI estimator: blank until inputs, computes standard EMI", async ({ page }
   await expect(out).toContainText("71,978");
 });
 
+test("virtual tour: walkthrough loads on click; 360° viewer renders", async ({ page }) => {
+  await page.goto("/");
+  await page.getByTestId("tour-section").scrollIntoViewIfNeeded();
+  // No third-party request until the visitor asks for the video
+  await expect(page.getByTestId("walkthrough-iframe")).toHaveCount(0);
+  await page.getByTestId("walkthrough-play").click();
+  await expect(page.getByTestId("walkthrough-iframe")).toHaveAttribute("src", /youtube-nocookie\.com\/embed\/6ATAQnA3edY/);
+  // Non-production build: labelled test pattern in the 360° viewer
+  await expect(page.getByTestId("tour360-test-badge")).toBeVisible();
+  await page.getByTestId("tour360-start").click();
+  const canvas = page.getByTestId("tour360-canvas");
+  await expect(canvas).toHaveAttribute("data-state", /ready|unsupported/);
+  if ((await canvas.getAttribute("data-state")) === "ready") {
+    await canvas.focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(page.getByRole("button", { name: "Zoom in" })).toBeVisible();
+  }
+});
+
 test("gallery: filter, lightbox navigation, show all", async ({ page }) => {
   await page.goto("/#gallery");
   const before = await page.getByTestId("gallery-item").count();

@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import { AtAGlance, Hallmarks, Overview } from "@/components/Overview";
 import Residences from "@/components/Residences";
 import EmiEstimator from "@/components/EmiEstimator";
+import VirtualTour from "@/components/VirtualTour";
 import Amenities from "@/components/Amenities";
 import Gallery from "@/components/Gallery";
 import Location from "@/components/Location";
@@ -57,6 +58,7 @@ export default function Home() {
         <Residences />
         <EmiEstimator />
         <Amenities />
+        <VirtualTour />
         <Gallery />
         <Location />
         <BrochureCta />
