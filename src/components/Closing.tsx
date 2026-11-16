@@ -6,6 +6,7 @@ import { Wordmark } from "./Nav";
 import { disclaimer, faqs, project } from "@/content/project";
 import { siteConfig, telLink, whatsappLink, waMessages } from "@/lib/config";
 import { Phone, Mail } from "lucide-react";
+import ImpressionTag from "./ImpressionTag";
 
 export function BrochureCta() {
   return (
@@ -14,6 +15,7 @@ export function BrochureCta() {
         <div className="relative min-h-[380px] overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/plans/masterplan.webp" alt="Tower and unit master plan — official brochure" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+          <ImpressionTag extra="not to scale" />
         </div>
         <Reveal className="container-lux flex flex-col justify-center py-20 lg:px-20">
           <p className="eyebrow text-gold">The Definitive Blueprint</p>
@@ -37,7 +39,7 @@ export function About() {
     <section id="about" aria-labelledby="about-title" className="bg-stone/40 py-24 sm:py-32">
       <div className="container-lux grid gap-12 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
-          <p className="eyebrow flex items-center gap-4 text-gold"><span className="font-serif text-base italic normal-case tracking-normal">06</span> About the Project</p>
+          <p className="eyebrow flex items-center gap-4 text-bronze"><span className="font-serif text-base italic normal-case tracking-normal">06</span> About the Project</p>
           <h2 id="about-title" className="display mt-6 text-[clamp(2.2rem,4.4vw,4rem)]">Makers of <em className="text-forest">masterpieces.</em></h2>
         </Reveal>
         <Reveal delay={0.1} className="space-y-5 text-[15px] leading-[1.85] text-charcoal/75 lg:col-span-6 lg:col-start-7">
@@ -51,10 +53,10 @@ export function About() {
             architecture is crafted by Hafeez Contractor together with global design experts.
           </p>
           <dl className="grid grid-cols-2 gap-6 border-t border-charcoal/15 pt-8 text-sm">
-            <div><dt className="eyebrow text-charcoal/50">Development Manager</dt><dd className="mt-2 font-serif text-xl">ACE Group</dd></div>
-            <div><dt className="eyebrow text-charcoal/50">Land Allottee</dt><dd className="mt-2 font-serif text-xl">Mahagun Infratech Pvt. Ltd.</dd></div>
-            <div><dt className="eyebrow text-charcoal/50">Project Launch</dt><dd className="mt-2 font-serif text-xl">{project.legal.launchDate}</dd></div>
-            <div><dt className="eyebrow text-charcoal/50">UP RERA</dt><dd className="mt-2 font-serif text-xl">{project.rera.number}</dd></div>
+            <div><dt className="eyebrow text-charcoal/70">Development Manager</dt><dd className="mt-2 font-serif text-xl">ACE Group</dd></div>
+            <div><dt className="eyebrow text-charcoal/70">Land Allottee</dt><dd className="mt-2 font-serif text-xl">Mahagun Infratech Pvt. Ltd.</dd></div>
+            <div><dt className="eyebrow text-charcoal/70">Project Launch</dt><dd className="mt-2 font-serif text-xl">{project.legal.launchDate}</dd></div>
+            <div><dt className="eyebrow text-charcoal/70">UP RERA</dt><dd className="mt-2 font-serif text-xl">{project.rera.number}</dd></div>
           </dl>
         </Reveal>
       </div>
@@ -67,7 +69,7 @@ export function Faq() {
     <section aria-labelledby="faq-title" className="bg-ivory py-24 sm:py-32">
       <div className="container-lux grid gap-12 lg:grid-cols-12">
         <Reveal className="lg:col-span-4">
-          <p className="eyebrow text-gold">Questions</p>
+          <p className="eyebrow text-bronze">Questions</p>
           <h2 id="faq-title" className="display mt-5 text-[clamp(2.2rem,4vw,3.6rem)]">Frequently asked.</h2>
         </Reveal>
         <div className="lg:col-span-8" data-testid="faq">
@@ -97,6 +99,7 @@ export function FinalCta() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/images/amenities/infinity-pool.webp" alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-25" loading="lazy" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-ink/60" />
+      <ImpressionTag corner="tr" />
       <div className="container-lux relative grid gap-16 py-24 sm:py-36 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
           <DecoMark className="h-6 w-12 text-gold" />
@@ -139,22 +142,22 @@ export function Footer() {
             ))}
           </nav>
           <div className="space-y-3 text-sm md:col-span-3">
-            <p className="eyebrow text-ivory/40">Contact</p>
+            <p className="eyebrow text-ivory/65">Contact</p>
             {tel && <a href={tel} className="block hover:text-gold">{siteConfig.phone}</a>}
             {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="block hover:text-gold">{siteConfig.email}</a>}
             {siteConfig.advertiserName && <p>Marketed by {siteConfig.advertiserName}{siteConfig.agentRera ? ` · Agent RERA: ${siteConfig.agentRera}` : ""}</p>}
           </div>
           <div className="space-y-2 text-sm md:col-span-2">
-            <p className="eyebrow text-ivory/40">UP RERA</p>
+            <p className="eyebrow text-ivory/65">UP RERA</p>
             <p className="font-medium text-ivory">{project.rera.number}</p>
             <a href={project.rera.website} target="_blank" rel="noopener" className="block text-xs hover:text-gold">up-rera.in/projects ↗</a>
           </div>
         </div>
-        <p className="mt-10 text-[11px] leading-relaxed text-ivory/40">
+        <p className="mt-10 text-xs leading-relaxed text-ivory/65">
           <strong className="font-semibold text-ivory/55">Disclaimer:</strong> {disclaimer} Project collection account: {project.legal.collectionAccount}.
           {!siteConfig.advertiserName && " This is a marketing website; it is not the official website of the developer. Official project information is available at www.acegroupindia.com."}
         </p>
-        <div className="mt-8 flex flex-wrap justify-between gap-4 text-xs text-ivory/40">
+        <div className="mt-8 flex flex-wrap justify-between gap-4 text-xs text-ivory/65">
           <p>© ACE Mahagun Medalleo marketing website</p>
           <div className="flex gap-6"><a href="/privacy" className="hover:text-gold">Privacy Policy</a><a href="/terms" className="hover:text-gold">Terms &amp; Conditions</a></div>
         </div>

@@ -29,11 +29,11 @@ export default function FloatingActions() {
       {/* Sticky mobile enquiry bar */}
       <div className={`fixed inset-x-0 bottom-0 z-40 flex border-t border-ivory/10 bg-ink/95 backdrop-blur-md transition-transform duration-500 sm:hidden ${show ? "translate-y-0" : "translate-y-full"}`} data-testid="mobile-bar">
         {tel && (
-          <a href={tel} className="flex flex-1 items-center justify-center gap-2 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-ivory" aria-label="Call property advisor">
+          <a href={tel} className="flex flex-1 items-center justify-center gap-2 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-ivory" aria-label="Call property advisor">
             <Phone className="size-4" /> Call
           </a>
         )}
-        <EnquireButton source="mobile-bar" className="flex flex-[2] items-center justify-center bg-gold py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink">Enquire Now</EnquireButton>
+        <EnquireButton source="mobile-bar" className="flex flex-[2] items-center justify-center bg-gold py-4 text-xs font-semibold uppercase tracking-[0.2em] text-ink">Enquire Now</EnquireButton>
       </div>
     </>
   );

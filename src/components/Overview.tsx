@@ -8,7 +8,7 @@ export function Overview() {
       <div className="container-lux grid gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5 lg:pt-10">
           <Reveal>
-            <p className="eyebrow flex items-center gap-4 text-gold"><span className="font-serif text-base italic tracking-normal normal-case">01</span> The Residence</p>
+            <p className="eyebrow flex items-center gap-4 text-bronze"><span className="font-serif text-base italic tracking-normal normal-case">01</span> The Residence</p>
             <h2 id="overview-title" className="display mt-6 text-[clamp(2.4rem,5vw,4.6rem)]">
               More Than a Residence. <em className="text-forest">A Distinctive Way of Living.</em>
             </h2>
@@ -38,7 +38,6 @@ export function Overview() {
           <Reveal delay={0.2} className="relative -mt-24 ml-auto w-[62%] border-[10px] border-ivory sm:-mt-36 sm:w-[48%]">
             <ParallaxImage src="/images/amenities/pool-arches.webp" alt="Arched colonnade and pool — clubhouse render" className="aspect-[4/3]" strength={4} />
           </Reveal>
-          <p className="mt-3 text-right text-[10px] uppercase tracking-[0.2em] text-charcoal/40">Artistic impressions</p>
         </div>
       </div>
     </section>
@@ -64,11 +63,11 @@ export function AtAGlance() {
             <Reveal key={f.k} delay={i * 0.08} className={`px-2 py-10 sm:px-8 ${i > 0 ? "border-t border-ivory/10 sm:border-t-0" : ""} ${i % 2 === 1 ? "sm:border-l sm:border-ivory/10" : ""} ${i > 1 ? "sm:border-t lg:border-t-0" : ""} ${i > 0 ? "lg:border-l lg:border-ivory/10" : ""}`}>
               <dt className="eyebrow text-gold">{f.k}</dt>
               <dd className={`mt-4 ${f.mono ? "font-sans text-xl font-medium tracking-wide sm:text-[1.35rem]" : "font-serif text-3xl font-light"}`}>{f.v}</dd>
-              <dd className="mt-2 text-xs text-ivory/45">{f.sub}</dd>
+              <dd className="mt-2 text-xs text-ivory/65">{f.sub}</dd>
             </Reveal>
           ))}
         </dl>
-        <div className="mt-10 grid gap-6 text-center text-xs text-ivory/50 sm:grid-cols-2">
+        <div className="mt-10 grid gap-6 text-center text-xs text-ivory/65 sm:grid-cols-2">
           <p>Architecture · <span className="text-ivory/80">{project.architect.display}</span></p>
           <p>Sustainability · <span className="text-ivory/80">{project.certification.display}</span></p>
         </div>
@@ -93,9 +92,9 @@ export function Hallmarks() {
           {hallmarks.map((h, i) => (
             <Reveal as="li" key={h.title} delay={(i % 4) * 0.07}
               className="group relative border-b border-charcoal/15 py-8 pr-4 sm:py-10 sm:pr-10 lg:border-r lg:px-8 lg:[&:nth-child(4n)]:border-r-0 lg:[&:nth-child(4n+1)]:pl-0">
-              <span className="font-serif text-sm italic text-gold">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-serif text-sm italic text-bronze">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-5 font-serif text-xl leading-tight sm:text-2xl transition-colors duration-500 group-hover:text-forest">{h.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-charcoal/60">{h.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-charcoal/70">{h.body}</p>
               <span className="absolute bottom-0 left-0 h-px w-0 bg-gold transition-all duration-700 group-hover:w-full" />
             </Reveal>
           ))}

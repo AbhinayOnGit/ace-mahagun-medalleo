@@ -40,14 +40,14 @@ export default function EmiEstimator() {
   const res = useMemo(() => (price > 0 && rateValid ? computeEmi(loan, rate, years) : null), [price, rateValid, loan, rate, years]);
 
   const id = (s: string) => `${uid}-${s}`;
-  const label = "eyebrow text-charcoal/60";
+  const label = "eyebrow text-charcoal/70";
 
   return (
     <section id="emi" aria-labelledby="emi-title" className="bg-[#f4ede2] py-24 sm:py-32" data-testid="emi-section">
       <div className="container-lux">
         <Reveal className="grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-gold">Plan Your Purchase</p>
+            <p className="eyebrow text-bronze">Plan Your Purchase</p>
             <h2 id="emi-title" className="display mt-6 text-[clamp(2.2rem,4.6vw,4.2rem)]">
               Home-loan <em className="text-forest">EMI estimator.</em>
             </h2>
@@ -77,7 +77,7 @@ export default function EmiEstimator() {
                   value={rateText} onChange={(e) => setRateText(e.target.value.replace(/[^\d.]/g, "").slice(0, 5))}
                   aria-invalid={rateText !== "" && !rateValid} aria-describedby={id("rate-hint")}
                   data-testid="emi-rate" />
-                <p id={id("rate-hint")} className={`mt-1.5 text-xs ${rateText !== "" && !rateValid ? "text-[#c2410c]" : "text-charcoal/45"}`}>
+                <p id={id("rate-hint")} className={`mt-1.5 text-xs ${rateText !== "" && !rateValid ? "text-[#c2410c]" : "text-charcoal/70"}`}>
                   {rateText !== "" && !rateValid ? "Enter a rate between 0 and 25%." : "Use the rate your bank has offered you."}
                 </p>
               </div>
@@ -92,7 +92,7 @@ export default function EmiEstimator() {
                 <input id={id("down")} type="range" min={10} max={60} step={5} value={downPct}
                   onChange={(e) => setDownPct(Number(e.target.value))} className="mt-4 w-full accent-[#735b2e]"
                   aria-valuetext={`${downPct} percent`} data-testid="emi-down" />
-                <div className="mt-1 flex justify-between text-[11px] text-charcoal/45"><span>10%</span><span>60%</span></div>
+                <div className="mt-1 flex justify-between text-xs text-charcoal/70"><span>10%</span><span>60%</span></div>
               </div>
               <div>
                 <div className="flex items-baseline justify-between">
@@ -102,7 +102,7 @@ export default function EmiEstimator() {
                 <input id={id("tenure")} type="range" min={5} max={30} step={1} value={years}
                   onChange={(e) => setYears(Number(e.target.value))} className="mt-4 w-full accent-[#735b2e]"
                   aria-valuetext={`${years} years`} data-testid="emi-tenure" />
-                <div className="mt-1 flex justify-between text-[11px] text-charcoal/45"><span>5 yrs</span><span>30 yrs</span></div>
+                <div className="mt-1 flex justify-between text-xs text-charcoal/70"><span>5 yrs</span><span>30 yrs</span></div>
               </div>
             </div>
           </div>
@@ -112,18 +112,18 @@ export default function EmiEstimator() {
             <div>
               <p className="eyebrow flex items-center gap-2 text-gold"><Calculator className="size-3.5" aria-hidden /> Estimated monthly EMI</p>
               <p className="mt-5 font-serif text-[clamp(2.6rem,5vw,4rem)] leading-none tabular-nums" data-testid="emi-value">
-                {res ? inr(res.emi) : "—"}<span className="ml-2 font-sans text-sm text-ivory/50">{res ? "/ month" : ""}</span>
+                {res ? inr(res.emi) : "—"}<span className="ml-2 font-sans text-sm text-ivory/65">{res ? "/ month" : ""}</span>
               </p>
               {!res && <p className="mt-4 text-sm text-ivory/55">Enter a quoted price and interest rate to calculate.</p>}
               <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-ivory/15 pt-6 text-sm">
-                <div><dt className="eyebrow text-ivory/50">Loan amount</dt><dd className="mt-2 font-serif text-xl tabular-nums">{price ? inr(loan) : "—"}</dd></div>
-                <div><dt className="eyebrow text-ivory/50">Total interest</dt><dd className="mt-2 font-serif text-xl tabular-nums">{res ? inr(res.interest) : "—"}</dd></div>
-                <div><dt className="eyebrow text-ivory/50">Total payable</dt><dd className="mt-2 font-serif text-xl tabular-nums">{res ? inr(res.total) : "—"}</dd></div>
-                <div><dt className="eyebrow text-ivory/50">Instalments</dt><dd className="mt-2 font-serif text-xl tabular-nums">{res ? res.months : "—"}</dd></div>
+                <div><dt className="eyebrow text-ivory/65">Loan amount</dt><dd className="mt-2 font-serif text-xl tabular-nums">{price ? inr(loan) : "—"}</dd></div>
+                <div><dt className="eyebrow text-ivory/65">Total interest</dt><dd className="mt-2 font-serif text-xl tabular-nums">{res ? inr(res.interest) : "—"}</dd></div>
+                <div><dt className="eyebrow text-ivory/65">Total payable</dt><dd className="mt-2 font-serif text-xl tabular-nums">{res ? inr(res.total) : "—"}</dd></div>
+                <div><dt className="eyebrow text-ivory/65">Instalments</dt><dd className="mt-2 font-serif text-xl tabular-nums">{res ? res.months : "—"}</dd></div>
               </dl>
             </div>
             <div className="mt-10">
-              <p className="text-[11px] leading-relaxed text-ivory/45">
+              <p className="text-xs leading-relaxed text-ivory/65">
                 Illustrative only — not an offer, quotation or loan sanction. Excludes stamp duty, registration, GST,
                 maintenance and other charges. Actual EMI depends on your lender&apos;s terms and eligibility.
               </p>

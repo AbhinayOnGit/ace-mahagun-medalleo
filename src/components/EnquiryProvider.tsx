@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import EnquiryForm from "./EnquiryForm";
 import type { ENQUIRY_TYPES } from "@/lib/lead-schema";
+import ImpressionTag from "./ImpressionTag";
 
 type EnquiryType = (typeof ENQUIRY_TYPES)[number];
 type Ctx = { open: (type?: EnquiryType, source?: string) => void };
@@ -75,6 +76,7 @@ export default function EnquiryProvider({ children }: { children: React.ReactNod
               <div className="relative hidden overflow-hidden bg-charcoal sm:block">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/amenities/towers-dusk.webp" alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+                <ImpressionTag corner="tr" />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-8 text-ivory">
                   <p className="eyebrow text-gold">ACE Mahagun Medalleo</p>

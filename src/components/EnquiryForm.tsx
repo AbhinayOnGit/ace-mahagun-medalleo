@@ -58,7 +58,7 @@ export default function EnquiryForm({ defaultType = "Callback", formLocation, to
 
   const dark = tone === "dark";
   const fieldCls = `field ${dark ? "field-dark text-ivory placeholder:text-ivory/40" : "placeholder:text-charcoal/40"}`;
-  const labelCls = `eyebrow ${dark ? "text-ivory/60" : "text-charcoal/60"}`;
+  const labelCls = `eyebrow ${dark ? "text-ivory/60" : "text-charcoal/70"}`;
   const id = (n: string) => `${uid}-${n}`;
 
   const set = (k: keyof typeof values, v: string | boolean) => {
@@ -170,7 +170,7 @@ export default function EnquiryForm({ defaultType = "Callback", formLocation, to
       <div>
         <label htmlFor={id("mobile")} className={labelCls}>Mobile number *</label>
         <div className="flex items-end gap-2">
-          <span className={`pb-[0.6rem] text-base ${dark ? "text-ivory/60" : "text-charcoal/60"}`}>+91</span>
+          <span className={`pb-[0.6rem] text-base ${dark ? "text-ivory/60" : "text-charcoal/70"}`}>+91</span>
           <input id={id("mobile")} name="mobile" type="tel" inputMode="numeric" autoComplete="tel-national" maxLength={17}
             placeholder="98XXX XXXXX" className={fieldCls} value={values.mobile}
             onChange={(e) => set("mobile", e.target.value.replace(/[^\d+\s-]/g, ""))}
@@ -244,7 +244,7 @@ export default function EnquiryForm({ defaultType = "Callback", formLocation, to
         <button type="submit" disabled={state === "submitting"} className={`btn ${dark ? "btn-gold" : "btn-dark"} min-w-52 disabled:opacity-60`} data-testid="enquiry-submit">
           {state === "submitting" ? (<><Loader2 className="size-4 animate-spin" aria-hidden /> Sending…</>) : "Submit Enquiry"}
         </button>
-        <p className={`text-[11px] ${dark ? "text-ivory/45" : "text-charcoal/45"}`}>We never share your details with third parties.</p>
+        <p className={`text-xs ${dark ? "text-ivory/65" : "text-charcoal/70"}`}>We never share your details with third parties.</p>
       </div>
     </form>
   );

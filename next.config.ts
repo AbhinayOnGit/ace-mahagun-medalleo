@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // Landing page traffic is mostly first-time ad visitors: inline the small Tailwind CSS
+  // to remove the render-blocking stylesheet request (see Next docs: inlineCss).
+  experimental: { inlineCss: true },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

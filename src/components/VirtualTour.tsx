@@ -5,6 +5,7 @@ import { Minus, Play, Plus, RotateCcw, View } from "lucide-react";
 import Reveal from "./Reveal";
 import { tour360TestPattern, tours360, walkthrough, type Tour360 } from "@/content/project";
 import { PanoViewer } from "@/lib/pano";
+import ImpressionTag from "./ImpressionTag";
 
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
@@ -28,18 +29,19 @@ function WalkthroughVideo() {
             data-testid="walkthrough-iframe"
           />
         ) : (
-          <button type="button" onClick={() => setPlay(true)} className="group absolute inset-0 h-full w-full" aria-label="Play the official walkthrough video" data-testid="walkthrough-play">
+          <button type="button" onClick={() => setPlay(true)} className="group absolute inset-0 h-full w-full" data-testid="walkthrough-play">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={walkthrough.poster} alt="" loading="lazy" className="h-full w-full object-cover opacity-80 transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105" />
             <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
             <span className="absolute left-1/2 top-1/2 inline-flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/60 bg-ink/40 text-ivory backdrop-blur transition-colors group-hover:bg-gold group-hover:text-ink">
               <Play className="ml-1 size-7" aria-hidden />
             </span>
-            <span className="eyebrow absolute bottom-5 left-5 text-ivory">Watch the walkthrough</span>
+            <span className="eyebrow absolute bottom-5 left-5 text-ivory">Watch the walkthrough<span className="sr-only"> — official ACE video</span></span>
+            <ImpressionTag corner="tr" />
           </button>
         )}
       </div>
-      <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-2 text-[11px] text-charcoal/50">
+      <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-2 text-xs text-charcoal/70">
         <span>Official ACE walkthrough film · plays from YouTube (privacy-enhanced mode)</span>
         <a href={walkthrough.source} target="_blank" rel="noopener" className="link-underline uppercase tracking-[0.2em] text-charcoal">Source: ACE Group</a>
       </figcaption>
@@ -113,7 +115,7 @@ function Viewer360() {
           </p>
         )}
         {isTest && (
-          <span className="absolute left-4 top-4 bg-[#7a1f0e] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-ivory" data-testid="tour360-test-badge">
+          <span className="absolute left-4 top-4 bg-[#7a1f0e] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-ivory" data-testid="tour360-test-badge">
             Test pattern · preview only
           </span>
         )}
@@ -135,7 +137,7 @@ function Viewer360() {
           ))}
         </div>
       )}
-      <figcaption className="mt-3 text-[11px] text-charcoal/50">{tour.note ?? `${tour.title} · 360° photo`}</figcaption>
+      <figcaption className="mt-3 text-xs text-charcoal/70">{tour.note ?? `${tour.title} · 360° photo`}</figcaption>
     </figure>
   );
 }
@@ -146,7 +148,7 @@ export default function VirtualTour() {
       <div className="container-lux">
         <Reveal className="grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-gold">Virtual Tour</p>
+            <p className="eyebrow text-bronze">Virtual Tour</p>
             <h2 id="tour-title" className="display mt-6 text-[clamp(2.4rem,5vw,4.6rem)]">
               Walk through <em className="text-forest">Medalleo.</em>
             </h2>

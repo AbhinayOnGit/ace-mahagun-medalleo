@@ -41,3 +41,29 @@ test("performance budget (lab, local)", async ({ page }) => {
   expect(m.cls).toBeLessThan(0.1);
   expect(m.jsKB).toBeLessThan(350);
 });
+
+test("axe: no WCAG 2.1 A/AA violations across the whole page", async ({ browser }) => {
+  // Reduced motion so scroll-reveal content is visible and gets checked too.
+  const ctx = await browser.newContext({ reducedMotion: "reduce", viewport: test.info().project.use.viewport ?? undefined });
+  const page = await ctx.newPage();
+  await page.goto("/");
+  for (let y = 0; y < 16000; y += 800) await page.mouse.wheel(0, 800);
+  await page.waitForTimeout(500);
+  const { default: AxeBuilder } = await import("@axe-core/playwright");
+  const r = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
+  const summary = r.violations.map((v) => `${v.id} x${v.nodes.length}: ${v.nodes[0]?.html.slice(0, 80)}`);
+  expect(summary).toEqual([]);
+  await ctx.close();
+});
+
+test("every render carries a visible 'Artist's impression' label", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByTestId("impression-tag").first()).toBeVisible(); // hero
+  await page.locator("#gallery").scrollIntoViewIfNeeded();
+  const items = page.getByTestId("gallery-item");
+  const n = await items.count();
+  expect(n).toBeGreaterThan(0);
+  for (let i = 0; i < n; i++) await expect(items.nth(i).getByTestId("impression-tag")).toHaveText(/Artist's impression/);
+  await expect(page.locator("#amenities").getByTestId("impression-tag").first()).toHaveText(/Artist's impression/);
+  await expect(page.locator("#residences").getByTestId("impression-tag").first()).toHaveText(/Artist's impression/);
+});

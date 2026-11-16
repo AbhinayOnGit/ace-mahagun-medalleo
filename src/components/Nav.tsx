@@ -19,7 +19,7 @@ const links = [
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`flex flex-col leading-none ${className}`}>
-      <span className="eyebrow text-[9px] tracking-[0.42em] opacity-70">ACE Mahagun</span>
+      <span className="eyebrow text-[9px] tracking-[0.42em] opacity-80">ACE Mahagun</span>
       <span className="mt-1 font-serif text-[1.65rem] font-light tracking-[0.18em]">MEDALLEO</span>
     </span>
   );
@@ -55,22 +55,23 @@ export default function Nav() {
         scrolled ? "border-b border-ivory/10 bg-ink/85 py-3 backdrop-blur-md" : "border-b border-transparent bg-transparent py-6"
       }`}
     >
-      <nav aria-label="Primary" className="container-lux flex items-center justify-between text-ivory">
-        <a href="#top" aria-label="ACE Mahagun Medalleo — back to top" className="text-ivory">
+      <nav aria-label="Primary" className="container-lux flex items-center justify-between gap-6 text-ivory">
+        <a href="#top" className="text-ivory">
           <Wordmark />
+          <span className="sr-only"> — back to top</span>
         </a>
-        <ul className="hidden items-center gap-8 lg:flex">
+        <ul className="hidden items-center gap-6 xl:flex 2xl:gap-8">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className={`eyebrow link-underline pb-1 transition-colors ${active === l.href ? "text-gold" : "text-ivory/80 hover:text-ivory"}`}>
+              <a href={l.href} className={`eyebrow link-underline whitespace-nowrap pb-1 tracking-[0.24em] transition-colors ${active === l.href ? "text-gold" : "text-ivory/80 hover:text-ivory"}`}>
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
         <div className="flex items-center gap-3">
-          <EnquireButton source="nav" className="btn btn-gold hidden min-h-11 sm:inline-flex" data-testid="nav-enquire">Enquire Now</EnquireButton>
-          <button className="inline-flex size-11 items-center justify-center lg:hidden" aria-label="Open menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
+          <EnquireButton source="nav" className="btn btn-gold hidden min-h-11 whitespace-nowrap sm:inline-flex" data-testid="nav-enquire">Enquire Now</EnquireButton>
+          <button className="inline-flex size-11 items-center justify-center xl:hidden" aria-label="Open menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
             <Menu className="size-6" />
           </button>
         </div>

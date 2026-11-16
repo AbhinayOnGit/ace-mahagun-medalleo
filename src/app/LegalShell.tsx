@@ -11,7 +11,7 @@ export default function LegalShell({ title, children }: { title: string; childre
       </header>
       <article className="container-lux max-w-3xl py-20 text-[15px] leading-[1.85] text-charcoal/80 [&_h2]:mt-10 [&_h2]:font-serif [&_h2]:text-3xl [&_h2]:text-charcoal [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5">
         <h1 className="display text-5xl text-charcoal">{title}</h1>
-        <p className="text-xs text-charcoal/50">Last updated: 16 November 2026</p>
+        <p className="text-xs text-charcoal/70">Last updated: 16 November 2026</p>
         {children}
       </article>
     </main>

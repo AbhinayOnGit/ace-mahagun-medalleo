@@ -56,7 +56,7 @@ test("internal anchors resolve and static routes respond", async ({ page, reques
 });
 
 test("navigation: sticky header and section links", async ({ page }) => {
-  const compact = (page.viewportSize()?.width ?? 1440) < 1024;
+  const compact = (page.viewportSize()?.width ?? 1440) < 1280; // full link row shows at xl (1280px)+
   await page.goto("/");
   const header = page.locator("header").first();
   await page.mouse.wheel(0, 900);
@@ -190,6 +190,9 @@ test("enquiry form validation (client side)", async ({ page }) => {
 });
 
 test("@local enquiry submission stores a test lead; duplicate is detected", async ({ page, request }, info) => {
+  // Each run gets its own client IP so the per-IP rate limit (5 per 10 min) isn't
+  // shared across the desktop / tablet / mobile projects of one suite run.
+  await page.setExtraHTTPHeaders({ "x-forwarded-for": `10.1.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250) + 1}` });
   const mobile = randomMobile();
   await page.goto("/#contact");
   await fillValid(page, "enquiry-form-contact", `+91 ${mobile.slice(0, 5)} ${mobile.slice(5)}`);

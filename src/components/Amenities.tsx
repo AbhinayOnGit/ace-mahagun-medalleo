@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Reveal from "./Reveal";
 import { amenityRealms, signatureAmenities } from "@/content/project";
+import ImpressionTag from "./ImpressionTag";
 
 export default function Amenities() {
   const [realm, setRealm] = useState(0);
@@ -16,7 +17,7 @@ export default function Amenities() {
       <div className="container-lux py-24 sm:py-36">
         <Reveal className="grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow flex items-center gap-4 text-gold"><span className="font-serif text-base italic normal-case tracking-normal">03</span> Signature Amenities</p>
+            <p className="eyebrow flex items-center gap-4 text-gold-soft"><span className="font-serif text-base italic normal-case tracking-normal">03</span> Signature Amenities</p>
             <h2 id="amen-title" className="display mt-6 text-[clamp(2.4rem,5vw,4.6rem)]">
               A life curated across <em className="text-gold-soft">two realms of sophistication.</em>
             </h2>
@@ -35,7 +36,7 @@ export default function Amenities() {
                   onMouseEnter={() => setFeature(i)} onFocus={() => setFeature(i)} onClick={() => setFeature(i)}
                   aria-pressed={feature === i}
                 >
-                  <span className={`font-serif text-sm italic transition-colors ${feature === i ? "text-gold" : "text-ivory/40"}`}>{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`font-serif text-sm italic transition-colors ${feature === i ? "text-gold-soft" : "text-ivory/65"}`}>{String(i + 1).padStart(2, "0")}</span>
                   <span className="flex-1">
                     <span className={`block font-serif text-[1.9rem] leading-tight transition-colors duration-500 ${feature === i ? "text-ivory" : "text-ivory/55 group-hover:text-ivory/85"}`}>{a.title}</span>
                     <span className={`grid transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${feature === i ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
@@ -55,7 +56,7 @@ export default function Amenities() {
                   className="absolute inset-0 h-full w-full object-cover"
                   initial={{ opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} />
               </AnimatePresence>
-              <span className="absolute bottom-3 right-4 text-[10px] uppercase tracking-[0.2em] text-ivory/70">Artistic impression</span>
+              <ImpressionTag />
             </div>
           </div>
         </div>
@@ -69,7 +70,7 @@ export default function Amenities() {
             <div role="tablist" aria-label="Amenity realms" className="flex gap-6">
               {amenityRealms.map((x, i) => (
                 <button key={x.id} role="tab" aria-selected={i === realm} onClick={() => setRealm(i)}
-                  className={`eyebrow border-b pb-2 transition-colors ${i === realm ? "border-gold text-ivory" : "border-transparent text-ivory/45 hover:text-ivory"}`}>
+                  className={`eyebrow border-b pb-2 transition-colors ${i === realm ? "border-gold text-ivory" : "border-transparent text-ivory/65 hover:text-ivory"}`}>
                   {x.title}
                 </button>
               ))}
@@ -81,6 +82,7 @@ export default function Amenities() {
               <div className="relative aspect-[16/10] overflow-hidden lg:col-span-7">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={r.image} alt={`${r.title} amenities — artistic impression`} loading="lazy" className="h-full w-full object-cover" />
+                <ImpressionTag />
               </div>
               <div className="lg:col-span-5">
                 <p className="eyebrow text-gold">{r.eyebrow}</p>
