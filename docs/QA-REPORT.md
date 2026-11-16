@@ -37,3 +37,16 @@ no consent → `consent_required` · `anon` SELECT on `leads` → **permission d
 ### Not yet tested (needs infrastructure/approval)
 - Against a live Supabase project and a Vercel preview URL (`BASE_URL=… npx playwright test --grep-invert @local`).
 - Real-device Safari/iOS; field Core Web Vitals over a real network.
+
+## Live infrastructure checks — 16 Nov 2026
+| Check | Result |
+|---|---|
+| Supabase `ace-medalleo-leads` (ap-south-1) migration | ✅ applied; `submit_lead` execute limited to `anon` |
+| Public key → SELECT / INSERT on `leads` | ✅ `permission denied` (42501) |
+| Site API → real Supabase, test mode | ✅ `created`, stored with `is_test=true`, status `Test`, normalised mobile, UTM source, consent |
+| Replay same submission | ✅ `duplicate`, still 1 row |
+| Invalid mobile | ✅ 422 |
+| Vercel preview build (`preview` branch, bom1 functions) | ✅ READY |
+| Supabase advisor | ℹ️ "RLS enabled, no policy" + "anon can execute SECURITY DEFINER" — both intentional (single controlled write path) |
+
+Not run: browser E2E on the protected preview URL (Vercel login blocks headless browser); route tested from the same build locally against the real database.
