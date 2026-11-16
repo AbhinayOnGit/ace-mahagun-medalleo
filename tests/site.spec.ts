@@ -112,6 +112,18 @@ test("floor-plan viewer: tabs, area table, zoom lightbox", async ({ page }) => {
   await expect(lb).toBeHidden();
 });
 
+test("EMI estimator: blank until inputs, computes standard EMI", async ({ page }) => {
+  await page.goto("/");
+  const out = page.getByTestId("emi-value");
+  await page.getByTestId("emi-section").scrollIntoViewIfNeeded();
+  await expect(out).toHaveText(/—/);
+  await page.getByTestId("emi-price").fill("10000000");
+  await expect(out).toHaveText(/—/); // no rate yet → no figure
+  await page.getByTestId("emi-rate").fill("9");
+  // 1 Cr, 20% down → 80 L loan, 9% p.a., 20 yrs → ₹71,978/month
+  await expect(out).toContainText("71,978");
+});
+
 test("gallery: filter, lightbox navigation, show all", async ({ page }) => {
   await page.goto("/#gallery");
   const before = await page.getByTestId("gallery-item").count();
