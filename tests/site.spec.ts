@@ -197,7 +197,8 @@ test("@local enquiry submission stores a test lead; duplicate is detected", asyn
   await page.goto("/#contact");
   await fillValid(page, "enquiry-form-contact", `+91 ${mobile.slice(0, 5)} ${mobile.slice(5)}`);
   await page.getByTestId("enquiry-form-contact").getByTestId("enquiry-submit").click();
-  await expect(page.getByTestId("enquiry-success")).toContainText("site visit request has been received");
+  // First write can hit a cold local test DB (PGlite/WASM start-up) — allow extra time.
+  await expect(page.getByTestId("enquiry-success")).toContainText("site visit request has been received", { timeout: 15_000 });
 
   // Same person, same type via modal → duplicate message
   await page.getByTestId("final-sitevisit").click();
@@ -245,4 +246,21 @@ test("@local API: per-IP rate limit returns 429", async ({ request }) => {
   let last = 0;
   for (let i = 0; i <= limit; i++) last = (await request.post("/api/enquiry", { data: mk(), headers: { "x-forwarded-for": ip } })).status();
   expect(last).toBe(429);
+});
+
+test("mobile: solid header when scrolled; Artist's impression tags never overlap", async ({ page }) => {
+  test.skip(test.info().project.name !== "mobile", "phone layout only");
+  await page.goto("/");
+  await page.mouse.wheel(0, 900);
+  await expect(page.locator("header").first()).toHaveCSS("background-color", "rgb(15, 18, 17)");
+  for (let y = 0; y < 14000; y += 500) {
+    await page.evaluate((y) => window.scrollTo(0, y), y);
+    const hits = await page.evaluate(() => {
+      const r = [...document.querySelectorAll('[data-testid="impression-tag"]')].map((e) => e.getBoundingClientRect()).filter((b) => b.width && b.bottom > 0 && b.top < innerHeight);
+      let n = 0;
+      for (let i = 0; i < r.length; i++) for (let j = i + 1; j < r.length; j++) if (r[i].left < r[j].right && r[j].left < r[i].right && r[i].top < r[j].bottom && r[j].top < r[i].bottom) n++;
+      return n;
+    });
+    expect(hits, `overlapping tags at scrollY=${y}`).toBe(0);
+  }
 });

@@ -24,30 +24,30 @@ export default function Hero() {
   );
 
   return (
-    <section id="top" ref={ref} className="grain relative h-[100svh] min-h-[640px] overflow-hidden bg-ink text-ivory" aria-label="ACE Mahagun Medalleo">
+    <section id="top" ref={ref} className="grain relative min-h-[100svh] overflow-hidden bg-ink text-white" aria-label="ACE Mahagun Medalleo">
       <motion.div style={{ y }} className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/hero.webp" alt="ACE Mahagun Medalleo — architectural render of the towers, Sector 107, Noida"
           className="hero-img h-full w-full object-cover object-[60%_center]" fetchPriority="high" />
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/20 to-ink/90" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/45 to-ink/95 sm:via-ink/25" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/25 to-transparent" />
 
-      <motion.div style={{ opacity: fade }} className="container-lux relative flex h-full flex-col justify-end pb-24 sm:pb-28">
+      <motion.div style={{ opacity: fade }} className="container-lux relative flex min-h-[100svh] flex-col justify-end pb-24 pt-32 [text-shadow:0_1px_14px_rgb(0_0_0/0.55)] sm:pb-28">
         <p className="hero-fade eyebrow flex items-center gap-4 text-gold" style={{ animationDelay: "0.2s" }}>
           <span className="h-px w-10 bg-gold" /> <span className="hidden sm:inline">ACE Mahagun Medalleo · </span>Sector 107, Noida
         </p>
-        <h1 className="display mt-6 max-w-5xl text-[clamp(2.9rem,8vw,7.5rem)]">
+        <h1 className="display mt-6 max-w-5xl text-[clamp(2.9rem,8vw,7.5rem)] text-white">
           {line("A New Perspective", 0.35)}
           {line("on Elevated Living.", 0.5)}
         </h1>
         <div className="hero-lift mt-8 grid max-w-5xl gap-8 md:grid-cols-[1.2fr_1fr] md:items-end" style={{ animationDelay: "0.5s" }}>
-          <p className="max-w-xl text-[15px] leading-relaxed text-ivory/80 sm:text-base">
+          <p className="max-w-xl text-[15px] leading-relaxed text-white sm:text-base">
             Discover an extraordinary residential address where contemporary architecture, thoughtful landscapes and refined living come together in Sector 107, Noida.
           </p>
           <dl className="flex gap-8 text-sm md:justify-end">
-            <div><dt className="eyebrow text-ivory/65">Residences</dt><dd className="mt-2 font-serif text-2xl">3 &amp; 4 BHK</dd></div>
-            <div><dt className="eyebrow text-ivory/65">Land</dt><dd className="mt-2 font-serif text-2xl">~10 Acres</dd></div>
+            <div><dt className="eyebrow text-white/85">Residences</dt><dd className="mt-2 font-serif text-2xl">3 &amp; 4 BHK</dd></div>
+            <div><dt className="eyebrow text-white/85">Land</dt><dd className="mt-2 font-serif text-2xl">~10 Acres</dd></div>
           </dl>
         </div>
         <div className="hero-lift mt-10 flex flex-wrap gap-3" style={{ animationDelay: "0.65s" }}>

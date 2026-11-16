@@ -52,7 +52,7 @@ export default function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,padding,border-color] duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
-        scrolled ? "border-b border-ivory/10 bg-ink/85 py-3 backdrop-blur-md" : "border-b border-transparent bg-transparent py-6"
+        scrolled ? "border-b border-ivory/10 bg-ink py-3 sm:bg-ink/85 sm:backdrop-blur-md" : "border-b border-transparent bg-transparent py-6"
       }`}
     >
       <nav aria-label="Primary" className="container-lux flex items-center justify-between gap-6 text-ivory">

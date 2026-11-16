@@ -22,7 +22,7 @@ export default function Reveal({ children, delay = 0, y = 28, className, as = "d
 }
 
 /** Image that drifts gently against scroll for a parallax feel. */
-export function ParallaxImage({ src, alt, className = "", strength = 8, label = true }: { src: string; alt: string; className?: string; strength?: number; label?: boolean }) {
+export function ParallaxImage({ src, alt, className = "", strength = 8, label = true, labelCorner = "br" }: { src: string; alt: string; className?: string; strength?: number; label?: boolean; labelCorner?: "tl" | "tr" | "bl" | "br" }) {
   const reduce = useReducedMotion();
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -37,7 +37,7 @@ export function ParallaxImage({ src, alt, className = "", strength = 8, label = 
         viewport={{ once: false, amount: 0 }}
         transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
       />
-      {label && <ImpressionTag />}
+      {label && <ImpressionTag corner={labelCorner} />}
     </div>
   );
 }

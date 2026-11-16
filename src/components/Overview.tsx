@@ -33,7 +33,7 @@ export function Overview() {
 
         <div className="relative lg:col-span-7">
           <Reveal y={40}>
-            <ParallaxImage src="/images/amenities/towers-dusk.webp" alt="ACE Mahagun Medalleo towers at dusk — architectural render" className="aspect-[4/5] sm:aspect-[5/4]" />
+            <ParallaxImage src="/images/amenities/towers-dusk.webp" alt="ACE Mahagun Medalleo towers at dusk — architectural render" className="aspect-[4/5] sm:aspect-[5/4]" labelCorner="tl" />
           </Reveal>
           <Reveal delay={0.2} className="relative -mt-24 ml-auto w-[62%] border-[10px] border-ivory sm:-mt-36 sm:w-[48%]">
             <ParallaxImage src="/images/amenities/pool-arches.webp" alt="Arched colonnade and pool — clubhouse render" className="aspect-[4/3]" strength={4} />
