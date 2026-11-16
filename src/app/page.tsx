@@ -1,69 +1,70 @@
-import Image from "next/image";
+import EnquiryProvider from "@/components/EnquiryProvider";
+import Nav from "@/components/Nav";
+import Hero from "@/components/Hero";
+import { AtAGlance, Hallmarks, Overview } from "@/components/Overview";
+import Residences from "@/components/Residences";
+import Amenities from "@/components/Amenities";
+import Gallery from "@/components/Gallery";
+import Location from "@/components/Location";
+import { About, BrochureCta, Faq, FinalCta, Footer } from "@/components/Closing";
+import FloatingActions from "@/components/FloatingActions";
+import { faqs, project } from "@/content/project";
+import { siteConfig } from "@/lib/config";
+
+function JsonLd() {
+  const data = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ApartmentComplex",
+      name: project.name,
+      description:
+        "Art Deco luxury 3 & 4 BHK residences on approx. 10 acres in Sector 107, Noida, with two clubhouses and resort-style landscapes.",
+      url: siteConfig.siteUrl,
+      image: `${siteConfig.siteUrl}/images/og.jpg`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Plot No. GH-01/A (Alpha), Sector 107",
+        addressLocality: "Noida",
+        addressRegion: "Uttar Pradesh",
+        postalCode: "201304",
+        addressCountry: "IN",
+      },
+      amenityFeature: ["Dense Forest Trail", "All-Weather Swimming Pool", "Two Exclusive Clubhouses", "Squash Court", "Spa", "Gym", "Infinity Swimming Pool"].map(
+        (name) => ({ "@type": "LocationFeatureSpecification", name, value: true }),
+      ),
+      identifier: { "@type": "PropertyValue", name: "UP RERA Registration", value: project.rera.number },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ];
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <EnquiryProvider>
+      <a href="#overview" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-gold focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
+      <Nav />
+      <main>
+        <Hero />
+        <Overview />
+        <AtAGlance />
+        <Hallmarks />
+        <Residences />
+        <Amenities />
+        <Gallery />
+        <Location />
+        <BrochureCta />
+        <About />
+        <Faq />
+        <FinalCta />
       </main>
-    </div>
+      <Footer />
+      <FloatingActions />
+      <JsonLd />
+    </EnquiryProvider>
   );
 }
