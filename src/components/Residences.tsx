@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Maximize2 } from "lucide-react";
 import Reveal from "./Reveal";
 import Lightbox from "./Lightbox";
+import FloorPlan3D from "./FloorPlan3D";
 import { EnquireButton } from "./EnquiryProvider";
 import { masterPlan, residences } from "@/content/project";
 import ImpressionTag from "./ImpressionTag";
@@ -28,6 +29,7 @@ export default function Residences() {
   const unit = residences.find((r) => r.id === unitId) ?? units[0];
   const [lb, setLb] = useState<number | null>(null);
   const [unitArea, setUnitArea] = useState<"sqft" | "sqm">("sqft");
+  const [mode, setMode] = useState<"2d" | "3d">("2d");
 
   const planItems = [
     ...residences.map((r) => ({ src: r.plan, alt: `${r.collection} ${r.type}${r.variant ? ` ${r.variant}` : ""} floor plan — wings ${r.wings}`, caption: `${r.collection} · ${r.type}${r.variant ? ` · ${r.variant}` : ""} · Wings ${r.wings} · Super area ${fmt(r.areas[0].sqft)} sq ft` })),
@@ -155,6 +157,20 @@ export default function Residences() {
             </div>
 
             <div className="lg:col-span-8">
+              <div className="mb-3 flex items-center justify-between gap-4">
+                <div className="inline-flex border border-charcoal/20" role="group" aria-label="Plan view">
+                  {(["2d", "3d"] as const).map((m) => (
+                    <button key={m} type="button" aria-pressed={mode === m} onClick={() => setMode(m)} data-testid={`plan-mode-${m}`}
+                      className={`px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition-colors ${mode === m ? "bg-charcoal text-ivory" : "text-charcoal/80 hover:bg-ivory"}`}>
+                      {m === "2d" ? "2D plan" : "3D view"}
+                    </button>
+                  ))}
+                </div>
+                {mode === "3d" && <span className="hidden text-xs text-charcoal/70 sm:inline">Drag to rotate · scroll or pinch to zoom</span>}
+              </div>
+              {mode === "3d" ? (
+                <FloorPlan3D key={unit.plan} planSrc={unit.plan} label={`${unit.collection} ${unit.type}${unit.variant ? ` ${unit.variant}` : ""}`} />
+              ) : (
               <button
                 onClick={() => setLb(residences.findIndex((r) => r.id === unit.id))}
                 className="group relative block w-full overflow-hidden bg-[#1c1c1c]"
@@ -171,8 +187,9 @@ export default function Residences() {
                   <Maximize2 className="size-3.5" /> Enlarge
                 </span>
               </button>
-              <div className="mt-3 flex items-center justify-between text-xs text-charcoal/70">
-                <span>Floor plan from the official brochure · not to scale</span>
+              )}
+              <div className="mt-3 flex items-center justify-between gap-4 text-xs text-charcoal/70">
+                <span>{mode === "3d" ? "3D view generated from the official brochure plan; walls traced from the drawing, heights illustrative · not to scale" : "Floor plan from the official brochure · not to scale"}</span>
                 <button className="link-underline uppercase tracking-[0.2em] text-charcoal" onClick={() => setLb(planItems.length - 1)}>View master plan</button>
               </div>
             </div>

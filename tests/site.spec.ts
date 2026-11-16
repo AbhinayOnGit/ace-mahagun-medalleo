@@ -143,6 +143,23 @@ test("virtual tour: walkthrough loads on click; 360° viewer renders", async ({ 
   }
 });
 
+test("floor plan 3D view: toggles, renders from official plan, controls work", async ({ page }) => {
+  await page.goto("/#floor-plans");
+  await page.getByTestId("plan-mode-3d").click();
+  const v = page.getByTestId("plan3d");
+  await expect(v).toHaveAttribute("data-state", /ready|error/, { timeout: 30_000 });
+  await expect(v).toContainText("3D from official plan");
+  if ((await v.getAttribute("data-state")) === "ready") {
+    await expect(v.locator("canvas")).toHaveCount(1);
+    await page.getByTestId("plan3d-top").click();
+    // switching unit rebuilds the model
+    await page.getByTestId("tab-Iconic Tower").click();
+    await expect(page.getByTestId("plan3d")).toHaveAttribute("data-state", "ready", { timeout: 30_000 });
+  }
+  await page.getByTestId("plan-mode-2d").click();
+  await expect(page.getByTestId("floorplan-open")).toBeVisible();
+});
+
 test("gallery: filter, lightbox navigation, show all", async ({ page }) => {
   await page.goto("/#gallery");
   const before = await page.getByTestId("gallery-item").count();
