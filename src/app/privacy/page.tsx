@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/config";
 export const metadata: Metadata = { title: "Privacy Policy | ACE Mahagun Medalleo", alternates: { canonical: "/privacy" }, robots: { index: false } };
 
 export default function Privacy() {
-  const who = siteConfig.advertiserName || "[Advertiser legal name]";
+  const who = siteConfig.advertiserName || "the advertiser";
   return (
     <LegalShell title="Privacy Policy">
       <h2>Who we are</h2>
@@ -20,11 +20,11 @@ export default function Privacy() {
       <h2>How we use it</h2>
       <p>Only to respond to your enquiry about this project — calls, SMS, email or WhatsApp from our property advisors — and to keep a record of your consent.</p>
       <h2>Storage and security</h2>
-      <p>Enquiries are stored in a secured database with access restricted to authorised staff. Data is retained for [retention period] and then deleted.</p>
+      <p>Enquiries are stored in a secured database with access restricted to authorised staff. Data is retained only as long as needed to respond to your enquiry, or until you ask us to delete it.</p>
       <h2>Sharing</h2>
-      <p>We do not sell your data. [Describe any sharing with the developer or a CRM provider, if applicable.]</p>
+      <p>We do not sell your data. Your enquiry may be shared with the project developer and our sales team solely to respond to it.</p>
       <h2>Your rights</h2>
-      <p>You may ask us to access, correct or delete your data, or withdraw consent, by writing to {siteConfig.email || "[contact email]"}. This policy follows the Digital Personal Data Protection Act, 2023.</p>
+      <p>You may ask us to access, correct or delete your data, or withdraw consent, {siteConfig.email ? <> by writing to {siteConfig.email}</> : " by replying to any message we send you"}. This policy follows the Digital Personal Data Protection Act, 2023.</p>
       <h2>Third-party content</h2>
       <p>The interactive map loads Google Maps only when you choose to load it, and WhatsApp links open WhatsApp; their own privacy policies apply.</p>
     </LegalShell>
