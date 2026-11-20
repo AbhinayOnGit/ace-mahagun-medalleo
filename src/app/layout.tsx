@@ -37,7 +37,11 @@ export const metadata: Metadata = {
     images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: "ACE Mahagun Medalleo towers, Sector 107 Noida" }],
   },
   twitter: { card: "summary_large_image", title, description, images: ["/images/og.jpg"] },
-  robots: { index: true, follow: true },
+  // Same switch as robots.txt: only indexable when explicitly allowed on production.
+  robots:
+    process.env.VERCEL_ENV === "production" && process.env.ALLOW_INDEXING === "true"
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   formatDetection: { telephone: false },
 };
 

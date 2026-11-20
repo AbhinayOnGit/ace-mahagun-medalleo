@@ -281,3 +281,9 @@ test("mobile: solid header when scrolled; Artist's impression tags never overlap
     expect(hits, `overlapping tags at scrollY=${y}`).toBe(0);
   }
 });
+
+test("not indexable unless ALLOW_INDEXING=true on production", async ({ page, request }) => {
+  await page.goto("/");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  expect(await (await request.get("/robots.txt")).text()).toContain("Disallow: /");
+});
