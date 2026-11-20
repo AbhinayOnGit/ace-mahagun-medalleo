@@ -287,3 +287,13 @@ test("not indexable unless ALLOW_INDEXING=true on production", async ({ page, re
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   expect(await (await request.get("/robots.txt")).text()).toContain("Disallow: /");
 });
+
+test("footer: no empty Contact column; RERA number shown; QR only when the official image is configured", async ({ page }) => {
+  await page.goto("/");
+  const footer = page.locator("footer");
+  const contact = footer.getByTestId("footer-contact");
+  if (await contact.count()) await expect(contact.locator("a, p").nth(1)).toBeVisible(); // heading + at least one real item
+  await expect(footer.getByTestId("footer-rera")).toContainText("UPRERAPRJ125561");
+  const qr = footer.getByTestId("rera-qr");
+  if (await qr.count()) expect(await qr.evaluate((i: HTMLImageElement) => i.naturalWidth)).toBeGreaterThan(0);
+});

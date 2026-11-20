@@ -51,6 +51,12 @@ export const project = {
     number: "UPRERAPRJ125561",
     website: "https://www.up-rera.in/projects",
     status: "VERIFIED" as Status,
+    /**
+     * Official UP-RERA project QR (the code issued by UP-RERA for UPRERAPRJ125561).
+     * PENDING: drop the official image at /public/images/rera-qr.png and set the
+     * path here. Do not substitute a self-generated QR. Footer shows it when set.
+     */
+    qrImage: null as string | null,
   },
   architect: { display: "Hafeez Contractor & global design experts", status: "VERIFIED" as Status },
   certification: { display: "IGBC Gold Certified", status: "VERIFIED" as Status },

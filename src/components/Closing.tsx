@@ -128,6 +128,7 @@ export function FinalCta() {
 
 export function Footer() {
   const tel = telLink();
+  const hasContact = Boolean(tel || siteConfig.email || siteConfig.advertiserName);
   return (
     <footer className="bg-ink pb-28 pt-20 text-ivory/70 sm:pb-12">
       <div className="container-lux">
@@ -141,16 +142,28 @@ export function Footer() {
               <a key={l} href={`/#${l.toLowerCase()}`} className="hover:text-gold">{l}</a>
             ))}
           </nav>
-          <div className="space-y-3 text-sm md:col-span-3">
-            <p className="eyebrow text-ivory/65">Contact</p>
-            {tel && <a href={tel} className="block hover:text-gold">{siteConfig.phone}</a>}
-            {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="block hover:text-gold">{siteConfig.email}</a>}
-            {siteConfig.advertiserName && <p>Marketed by {siteConfig.advertiserName}{siteConfig.agentRera ? ` · Agent RERA: ${siteConfig.agentRera}` : ""}</p>}
-          </div>
-          <div className="space-y-2 text-sm md:col-span-2">
+          {/* Contact column only when there is something real to show (no empty heading) */}
+          {hasContact && (
+            <div className="space-y-3 text-sm md:col-span-3" data-testid="footer-contact">
+              <p className="eyebrow text-ivory/65">Contact</p>
+              {tel && <a href={tel} className="block hover:text-gold">{siteConfig.phone}</a>}
+              {siteConfig.email && <a href={`mailto:${siteConfig.email}`} className="block hover:text-gold">{siteConfig.email}</a>}
+              {siteConfig.advertiserName && <p>Marketed by {siteConfig.advertiserName}{siteConfig.agentRera ? ` · Agent RERA: ${siteConfig.agentRera}` : ""}</p>}
+            </div>
+          )}
+          <div className={`space-y-2 text-sm ${hasContact ? "md:col-span-2" : "md:col-span-5"}`} data-testid="footer-rera">
             <p className="eyebrow text-ivory/65">UP RERA</p>
-            <p className="font-medium text-ivory">{project.rera.number}</p>
-            <a href={project.rera.website} target="_blank" rel="noopener" className="block text-xs hover:text-gold">up-rera.in/projects ↗</a>
+            <div className="flex items-start gap-4">
+              {project.rera.qrImage && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={project.rera.qrImage} alt={`UP-RERA QR code for ${project.rera.number}`} width={96} height={96} className="size-24 shrink-0 bg-white p-1.5" data-testid="rera-qr" />
+              )}
+              <div className="space-y-2">
+                <p className="font-medium text-ivory">{project.rera.number}</p>
+                <a href={project.rera.website} target="_blank" rel="noopener" className="block text-xs hover:text-gold">up-rera.in/projects ↗</a>
+                {project.rera.qrImage && <p className="text-xs text-ivory/65">Scan to verify on UP-RERA</p>}
+              </div>
+            </div>
           </div>
         </div>
         <p className="mt-10 text-xs leading-relaxed text-ivory/65">
